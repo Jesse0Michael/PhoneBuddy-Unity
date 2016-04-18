@@ -11,8 +11,8 @@ public class SliderScript : MonoBehaviour {
 	private float xMax;
 	private float xMin;
 
-	private bool open;
-	private bool close;
+	public static bool open;
+	public static bool close;
 	private float speed;
 
 	void Start () {
@@ -44,14 +44,7 @@ public class SliderScript : MonoBehaviour {
 
 	}
 
-	public void Clicked () {
-		Debug.Log ("Clicked");
-		//TODO toggle pos ... if far away from grabPosX
-		close = true;
-	}
-
 	public void Dragged () {
-//		Debug.Log (Input.mousePosition.x + " - " + grabPosX + " + " + startX + " = " + slider.transform.localPosition.x);
 		float xLoc = Input.mousePosition.x - grabPosX + startX;
 		if(xLoc >= xMin && xLoc <= xMax) {
 			slider.transform.localPosition = new Vector3(xLoc, slider.transform.localPosition.y, slider.transform.localPosition.z);
@@ -66,6 +59,10 @@ public class SliderScript : MonoBehaviour {
 
 	public void Released () {
 		Debug.Log ("Released");
-		//TODO move towards closest pos
+		if (Input.mousePosition.x > 100) {
+			open = true;
+		} else {
+			close = true;
+		}
 	}
 }
