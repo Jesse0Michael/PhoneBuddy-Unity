@@ -20,9 +20,10 @@ public class Dog {
 	
 	public Animator dogAnim;
 	public bool tugboolean;
+	private bool flippedLeft;
 
 	private FoodActivity foodActivity;
-//	private WaterActivity waterActivity;
+	private WaterActivity waterActivity;
 
 	public Dog (GameObject dog) {
 		me = dog;
@@ -34,20 +35,17 @@ public class Dog {
 		
 		dogScale = 1.0f;
 		origin = new Vector3(0, 0, 0);
-		//		Dog.transform.localPosition = origin;
-		returnSpeedX = .2f;
-		returnSpeedY = .1f;
+		returnSpeedX = .02f;
+		returnSpeedY = .01f;
 		returnSpeedS = .005f;
 
 		dogAnim = me.GetComponent<Animator> ();
 		
 		foodActivity = new FoodActivity (this);
-//		waterActivity = new WaterActivity ();
+		waterActivity = new WaterActivity (this);
 	}
 
 	public void Update() {
-		Debug.Log (me);
-		//		Debug.Log (Dog.transform.localPosition);
 		if (statThirst > 0.0f)
 		{
 			statThirst -= .0001f;
@@ -78,7 +76,7 @@ public class Dog {
 				break;
 				
 			case Activity.dogWater:
-				WaterActivity.Run();
+				waterActivity.Run();
 				break;
 			}
 		}
@@ -96,28 +94,28 @@ public class Dog {
 		{
 			//Game1.appDJ.drinkOn = false;
 			//Game1.appDJ.foodOn = false;
-			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, origin, returnSpeedS);
+			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, origin, returnSpeedX);
 			if (me.transform.localPosition != origin)
 			{
 				//Game1.appDJ.runningOn = true;
-				if (me.transform.localPosition.x >= origin.x)
+				if (me.transform.localPosition.y >= origin.y)
 				{
-					AnimTrigger("dogSheet_walk");
+					AnimTrigger("dogSheet_runTowards");
+				}
+				else if (me.transform.localPosition.y <= origin.y)
+				{
+					AnimTrigger("dogSheet_runAway");
+				}
+				else if (me.transform.localPosition.x >= origin.x)
+				{
+					AnimTrigger("dogSheet_walk_left");
 				}
 				else if (me.transform.localPosition.x <= origin.x)
 				{
 					AnimTrigger("dogSheet_walk");
 				}
 				
-				if (me.transform.localPosition.y >= origin.y)
-				{
-					AnimTrigger("dogSheet_runAway");
-				}
-				else if (me.transform.localPosition.y <= origin.y)
-				{
-					AnimTrigger("dogSheet_runTowards");
-					
-				}
+				
 			}
 			else
 			{
@@ -131,8 +129,36 @@ public class Dog {
 	}
 
 	public void AnimTrigger(string trigger) {
+		switch(trigger) {
+			case "dogSheet_walk_left":
+				Flip("left");
+				trigger = "dogSheet_walk";
+				break;
+			default:
+				Flip("right");
+				break;
+		}
+		
 		if(!dogAnim.GetCurrentAnimatorStateInfo(0).IsName(trigger)) {
 			dogAnim.SetTrigger(trigger);
+		}
+	}
+	
+	public void Flip(string direction) {
+		switch (direction.ToLower())
+		{
+			case "left":
+				if(!flippedLeft) {
+					flippedLeft = true;
+					me.transform.Rotate(new Vector3(0,180,0));
+				}
+				break;
+			case "right":
+				if(flippedLeft) {
+					flippedLeft = false;
+					me.transform.Rotate(new Vector3(0,180,0));
+				}
+				break;
 		}
 	}
 }
