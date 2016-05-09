@@ -19,6 +19,8 @@ public class Controller : MonoBehaviour {
 
 	public GameObject FoodDish;
 	public GameObject WaterDish;
+	public GameObject TugRope;
+	public GameObject TugRope60;
 
 
 	public static Activity myActivity;
@@ -37,9 +39,13 @@ public class Controller : MonoBehaviour {
 	void HideExcept(GameObject except) {
 		if (except != FoodDish) {
 			FoodDish.GetComponent<SpriteRenderer> ().enabled = false;
-		}
+		} 
 		if (except != WaterDish) {
 			WaterDish.GetComponent<SpriteRenderer> ().enabled = false;
+		} 
+		if (except != TugRope) {
+			TugRope.GetComponent<SpriteRenderer> ().enabled = false;
+			TugRope60.GetComponent<SpriteRenderer> ().enabled = false;
 		}
 	}
 	
@@ -47,13 +53,12 @@ public class Controller : MonoBehaviour {
 	void Update () {
 		myDog.Update ();
 
-
 		
-		if(myActivity != Activity.dogFetch)
-		{
+		// if(myActivity != Activity.dogFetch)
+		// {
 //			Game1.cfetch.s_ball.setVisible(false);
 //			Game1.cfetch.s_shadow.setVisible(false);
-		}
+		// }
 //		
 //		if(myActivity == Dog.activity.dogTug)
 //		{
@@ -100,6 +105,8 @@ public class Controller : MonoBehaviour {
 	public void Tug () {
 		Debug.Log ("Tug");
 		SliderScript.close = true;
+		myDog.tugboolean = true;
+		HideExcept (TugRope);
 		myActivity = Activity.dogTug;
 	}
 	

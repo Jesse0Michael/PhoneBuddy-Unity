@@ -7,6 +7,7 @@ public class Dog {
 	public bool returnHome;
 	
 	public Vector3 origin;
+	public Vector3 originScale;
 	
 	public float statHunger;
 	public float statHygiene;
@@ -14,8 +15,6 @@ public class Dog {
 	
 	public float returnSpeedX;
 	public float returnSpeedY;
-	
-	public float dogScale;
 	public float returnSpeedS;
 	
 	public Animator dogAnim;
@@ -24,6 +23,7 @@ public class Dog {
 
 	private FoodActivity foodActivity;
 	private WaterActivity waterActivity;
+	private TugActivity tugActivity;
 
 	public Dog (GameObject dog) {
 		me = dog;
@@ -33,8 +33,8 @@ public class Dog {
 		returnHome = false;
 		tugboolean = false;
 		
-		dogScale = 1.0f;
 		origin = new Vector3(0, 0, 0);
+		originScale = new Vector3(1, 1, 1);
 		returnSpeedX = .02f;
 		returnSpeedY = .01f;
 		returnSpeedS = .005f;
@@ -43,6 +43,7 @@ public class Dog {
 		
 		foodActivity = new FoodActivity (this);
 		waterActivity = new WaterActivity (this);
+		tugActivity = new TugActivity(this);
 	}
 
 	public void Update() {
@@ -68,7 +69,7 @@ public class Dog {
 				break;
 				
 			case Activity.dogTug:
-				TugActivity.Run();
+				tugActivity.Run();
 				break;
 				
 			case Activity.dogFood:
@@ -83,7 +84,7 @@ public class Dog {
 		
 		if (tugboolean == true)
 		{
-			returnSpeedS = .1f;
+			returnSpeedS = .05f;
 		}
 		else
 		{
@@ -95,7 +96,8 @@ public class Dog {
 			//Game1.appDJ.drinkOn = false;
 			//Game1.appDJ.foodOn = false;
 			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, origin, returnSpeedX);
-			if (me.transform.localPosition != origin)
+			me.transform.localScale = Vector3.MoveTowards(me.transform.localScale, originScale, returnSpeedS);
+			if (me.transform.localPosition != origin || me.transform.localScale != originScale)
 			{
 				//Game1.appDJ.runningOn = true;
 				if (me.transform.localPosition.y >= origin.y)
@@ -114,8 +116,6 @@ public class Dog {
 				{
 					AnimTrigger("dogSheet_walk");
 				}
-				
-				
 			}
 			else
 			{
@@ -127,8 +127,16 @@ public class Dog {
 		}
 
 	}
+	
+	public void OnMouseDown() {
+		Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+		if (hit != null && hit.collider != null) {
+			Debug.Log ("I'm hitting "+hit.collider.name);
+		}
+	}
 
-	public void AnimTrigger(string trigger) {
+	public bool AnimTrigger(string trigger) {
 		switch(trigger) {
 			case "dogSheet_walk_left":
 				Flip("left");
@@ -141,7 +149,9 @@ public class Dog {
 		
 		if(!dogAnim.GetCurrentAnimatorStateInfo(0).IsName(trigger)) {
 			dogAnim.SetTrigger(trigger);
+			return true;
 		}
+		return false;
 	}
 	
 	public void Flip(string direction) {

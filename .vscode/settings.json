@@ -17,5 +17,8 @@
         "**/Library": true,
         "**/ProjectSettings": true,
         "**/Temp": true
-    }
+    },
+    
+    // Controls if the editor shows reference information for the modes that support it
+	"editor.referenceInfos": false
 }

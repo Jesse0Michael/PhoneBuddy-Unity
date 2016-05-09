@@ -35,4 +35,8 @@ public class WaterActivity {
 			}
 		}
 	}
+	
+	public void Chuck() {
+		
+	}
 }
