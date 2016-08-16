@@ -8,9 +8,13 @@ public class FoodActivity {
 	private Vector3 target;
 
 	public FoodActivity(Dog dog) {
-		atTarget = false;
+		Init();
 		target = new Vector3 (2.15f, -0.6f, 0.0f);
 		this.dog = dog;
+	}
+
+	public void Init() {
+		atTarget = false;
 	}
 	
 	public void Run () {
@@ -20,7 +24,7 @@ public class FoodActivity {
 				// Game1.appDJ.foodOn = true;
 				dog.statHunger += 0.0004f;
 			} else {
-				dog.returnHome = true;
+				dog.ReturnHome();
 				atTarget = false;
 				// Game1.appDJ.foodOn = false;
 				// Game1.appDJ.runningOn = true;

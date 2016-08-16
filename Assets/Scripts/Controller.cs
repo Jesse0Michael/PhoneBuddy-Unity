@@ -21,6 +21,8 @@ public class Controller : MonoBehaviour {
 	public GameObject WaterDish;
 	public GameObject TugRope;
 	public GameObject TugRope60;
+	public GameObject Ball;
+	public GameObject Shadow;
 
 
 	public static Activity myActivity;
@@ -45,69 +47,40 @@ public class Controller : MonoBehaviour {
 		} 
 		if (except != TugRope) {
 			TugRope.GetComponent<SpriteRenderer> ().enabled = false;
+			TugRope60.GetComponent<CircleCollider2D> ().enabled = false;
 			TugRope60.GetComponent<SpriteRenderer> ().enabled = false;
 		}
+		if (except != Ball) {
+			Ball.GetComponent<SpriteRenderer> ().enabled = false;
+			Shadow.GetComponent<SpriteRenderer> ().enabled = false;
+		}
+	}
+	
+	void SetActivity(Activity act) {
+		if (myActivity != act) {
+			myDog.ReturnHome();
+		}
+		myActivity = act;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		myDog.Update ();
-
-		
-		// if(myActivity != Activity.dogFetch)
-		// {
-//			Game1.cfetch.s_ball.setVisible(false);
-//			Game1.cfetch.s_shadow.setVisible(false);
-		// }
-//		
-//		if(myActivity == Dog.activity.dogTug)
-//		{
-//			if (Game1.ctug.playPos == true && Game1.ctug.inPlay == false)
-//			{
-//				Game1.ctug.s_ropetex.setVisible(true);
-//			}
-//			else
-//			{
-//				
-//				Game1.ctug.s_ropetex.setVisible(false);
-//			}
-//			
-//			if(Game1.ctug.inPlay == true)
-//			{
-//				Game1.ctug.s_ropetex2.setVisible(true);
-//			}
-//			else
-//			{
-//				Game1.ctug.s_ropetex2.setVisible(false);
-//				Game1.ctug.ropePos = new Vector2((int)((float)Game1.screenWidth * .5), (int)((float)Game1.screenHeight * .6));
-//				Game1.ctug.ropePos2 = new Vector2((int)((float)Game1.screenWidth * .5 ), (int)((float)Game1.screenHeight * .6));
-//				Game1.ctug.s_ropetex.setPosition(Game1.ctug.ropePos.x - (Game1.ropeTex.getWidth() / 2), Game1.ctug.ropePos.y - (Game1.ropeTex.getHeight() / 2));
-//				Game1.ctug.s_ropetex2.setPosition(Game1.ctug.ropePos2.x - (Game1.ropeTex2.getWidth() / 2), Game1.ctug.ropePos2.y - (Game1.ropeTex2.getHeight() / 2));
-//				
-//				
-//			}
-//		}
-//		else
-//		{
-//			Game1.ctug.s_ropetex2.setVisible(false);
-//			Game1.ctug.s_ropetex.setVisible(false);
-//		}
-//		
-//		
+		myDog.Update ();	
 	}
 
 	public void Fetch () {
 		Debug.Log ("Fetch");
 		SliderScript.close = true;
-		myActivity = Activity.dogFetch;
+		HideExcept (Ball);
+		Ball.GetComponent<SpriteRenderer> ().enabled = true;
+		SetActivity(Activity.dogFetch);
 	}
 	
 	public void Tug () {
 		Debug.Log ("Tug");
 		SliderScript.close = true;
-		myDog.tugboolean = true;
 		HideExcept (TugRope);
-		myActivity = Activity.dogTug;
+		SetActivity(Activity.dogTug);
 	}
 	
 	public void Food () {
@@ -115,7 +88,7 @@ public class Controller : MonoBehaviour {
 		SliderScript.close = true;
 		HideExcept (FoodDish);
 		FoodDish.GetComponent<SpriteRenderer> ().enabled = true;
-		myActivity = Activity.dogFood;
+		SetActivity(Activity.dogFood);
 	}
 	
 	public void Water () {
@@ -123,13 +96,13 @@ public class Controller : MonoBehaviour {
 		SliderScript.close = true;
 		HideExcept (WaterDish);
 		WaterDish.GetComponent<SpriteRenderer> ().enabled = true;
-		myActivity = Activity.dogWater;
+		SetActivity(Activity.dogWater);
 	}
 	
 	public void Poo () {
 		Debug.Log ("Poo");
 		SliderScript.close = true;
-		myActivity = Activity.dogPoo;
+		SetActivity(Activity.dogPoo);
 	}
 
 	public void Vibrate () {

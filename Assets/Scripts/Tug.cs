@@ -12,13 +12,16 @@ public class TugActivity {
 	public GameObject TugRope60;
 
 	public TugActivity (Dog thatDog) {
-		atTarget = false;
+		Init();
 		target = new Vector3 (0.0f, -1.25f, 0.0f);
 		targetScale = new Vector3 (4.0f, 4.0f, 1.0f);
 		dog = thatDog;
-		
 		TugRope = GameObject.Find("Rope");
 		TugRope60 = GameObject.Find("Rope60");
+	}
+	
+	public void Init() {
+		atTarget = false;
 	}
 	
 	public void Run () {
@@ -57,6 +60,7 @@ public class TugActivity {
 			if(dog.me.transform.localPosition == target && dog.me.transform.localScale == targetScale) {
 				// Game1.appDJ.runningOn = false;
 				TugRope60.GetComponent<SpriteRenderer> ().enabled = true;
+				TugRope60.GetComponent<CircleCollider2D> ().enabled = true;
 				dog.AnimTrigger("dogSheet_idle");
 				atTarget = true;
 			}

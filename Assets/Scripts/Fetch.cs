@@ -6,4 +6,8 @@ public static class FetchActivity {
 	public static void Run () {
 	
 	}
+
+	public static void Init() {
+		// atTarget = false;
+	}
 }

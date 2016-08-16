@@ -14,12 +14,11 @@ public class Dog {
 	public float statThirst;
 	
 	public float returnSpeedX;
-	public float returnSpeedY;
 	public float returnSpeedS;
 	
 	public Animator dogAnim;
-	public bool tugboolean;
 	private bool flippedLeft;
+	private bool returningFlag;
 
 	private FoodActivity foodActivity;
 	private WaterActivity waterActivity;
@@ -27,23 +26,22 @@ public class Dog {
 
 	public Dog (GameObject dog) {
 		me = dog;
-		statThirst = 1.0f;
+		statThirst = .95f;
 		statHygiene = 1.0f;
-		statHunger = 1.0f;
+		statHunger = .95f;
 		returnHome = false;
-		tugboolean = false;
+		returningFlag = false;
 		
 		origin = new Vector3(0, 0, 0);
 		originScale = new Vector3(1, 1, 1);
 		returnSpeedX = .02f;
-		returnSpeedY = .01f;
-		returnSpeedS = .005f;
+		returnSpeedS = .05f;
 
 		dogAnim = me.GetComponent<Animator> ();
 		
 		foodActivity = new FoodActivity (this);
 		waterActivity = new WaterActivity (this);
-		tugActivity = new TugActivity(this);
+		tugActivity = new TugActivity (this);
 	}
 
 	public void Update() {
@@ -66,29 +64,36 @@ public class Dog {
 			{
 			case Activity.dogFetch:
 				FetchActivity.Run();
+				if(returningFlag) {
+					FetchActivity.Init();
+					returningFlag = false;
+				}
 				break;
 				
 			case Activity.dogTug:
 				tugActivity.Run();
+				if(returningFlag) {
+					tugActivity.Init();
+					returningFlag = false;
+				}
 				break;
 				
 			case Activity.dogFood:
 				foodActivity.Run();
+				if(returningFlag) {
+					foodActivity.Init();
+					returningFlag = false;
+				}
 				break;
 				
 			case Activity.dogWater:
 				waterActivity.Run();
+				if(returningFlag) {
+					waterActivity.Init();
+					returningFlag = false;
+				}
 				break;
 			}
-		}
-		
-		if (tugboolean == true)
-		{
-			returnSpeedS = .05f;
-		}
-		else
-		{
-			returnSpeedS = .005f;
 		}
 		
 		if (returnHome == true)
@@ -122,18 +127,13 @@ public class Dog {
 				AnimTrigger("dogSheet_idle");
 				//Game1.appDJ.runningOn = false;
 				returnHome = false;
-				tugboolean = false;
 			}
 		}
-
 	}
-	
-	public void OnMouseDown() {
-		Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-		if (hit != null && hit.collider != null) {
-			Debug.Log ("I'm hitting "+hit.collider.name);
-		}
+
+	public void ReturnHome() {
+		returnHome = true;
+		returningFlag = true;
 	}
 
 	public bool AnimTrigger(string trigger) {
