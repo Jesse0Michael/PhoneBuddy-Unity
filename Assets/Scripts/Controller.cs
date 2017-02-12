@@ -27,13 +27,13 @@ public class Controller : MonoBehaviour {
 
 	public static Activity myActivity;
 
-	private Dog myDog;
+	public static Dog myDog;
 
 
 	// Use this for initialization
 	void Start () {
 		myActivity = Activity.dogIdle;
-		myDog = new Dog (Dog);
+		myDog = new Dog(Dog, Ball, TugRope, TugRope60);
 
 		HideExcept(null);
 	}

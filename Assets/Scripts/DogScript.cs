@@ -22,9 +22,10 @@ public class Dog {
 
 	private FoodActivity foodActivity;
 	private WaterActivity waterActivity;
+	private FetchActivity fetchActivity;
 	private TugActivity tugActivity;
 
-	public Dog (GameObject dog) {
+	public Dog (GameObject dog, GameObject ball, GameObject tug, GameObject tug60) {
 		me = dog;
 		statThirst = .95f;
 		statHygiene = 1.0f;
@@ -41,7 +42,8 @@ public class Dog {
 		
 		foodActivity = new FoodActivity (this);
 		waterActivity = new WaterActivity (this);
-		tugActivity = new TugActivity (this);
+		fetchActivity = new FetchActivity (this, ball);
+		tugActivity = new TugActivity (this, tug, tug60);
 	}
 
 	public void Update() {
@@ -63,9 +65,9 @@ public class Dog {
 			switch (Controller.myActivity)
 			{
 			case Activity.dogFetch:
-				FetchActivity.Run();
+				fetchActivity.Run();
 				if(returningFlag) {
-					FetchActivity.Init();
+					fetchActivity.Init();
 					returningFlag = false;
 				}
 				break;
@@ -100,24 +102,30 @@ public class Dog {
 		{
 			//Game1.appDJ.drinkOn = false;
 			//Game1.appDJ.foodOn = false;
-			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, origin, returnSpeedX);
-			me.transform.localScale = Vector3.MoveTowards(me.transform.localScale, originScale, returnSpeedS);
-			if (me.transform.localPosition != origin || me.transform.localScale != originScale)
+			RunTowards(origin, originScale);
+			
+		}
+	}
+
+	public void RunTowards(Vector3 target, Vector3 targetScale) {
+			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, target, returnSpeedX);
+			me.transform.localScale = Vector3.MoveTowards(me.transform.localScale, targetScale, returnSpeedS);
+			if (me.transform.localPosition != target || me.transform.localScale != targetScale)
 			{
 				//Game1.appDJ.runningOn = true;
-				if (me.transform.localPosition.y >= origin.y)
+				if (me.transform.localPosition.y >= target.y)
 				{
 					AnimTrigger("dogSheet_runTowards");
 				}
-				else if (me.transform.localPosition.y <= origin.y)
+				else if (me.transform.localPosition.y <= target.y)
 				{
 					AnimTrigger("dogSheet_runAway");
 				}
-				else if (me.transform.localPosition.x >= origin.x)
+				else if (me.transform.localPosition.x >= target.x)
 				{
 					AnimTrigger("dogSheet_walk_left");
 				}
-				else if (me.transform.localPosition.x <= origin.x)
+				else if (me.transform.localPosition.x <= target.x)
 				{
 					AnimTrigger("dogSheet_walk");
 				}
@@ -128,7 +136,6 @@ public class Dog {
 				//Game1.appDJ.runningOn = false;
 				returnHome = false;
 			}
-		}
 	}
 
 	public void ReturnHome() {

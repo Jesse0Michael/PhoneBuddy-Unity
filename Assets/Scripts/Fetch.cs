@@ -1,13 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class FetchActivity {
+public class FetchActivity {
 
-	public static void Run () {
-	
+	private Dog dog;
+	private GameObject ball;
+
+	public FetchActivity(Dog dog, GameObject ball) {
+		Init();
+		
+		this.dog = dog;
+		this.ball = ball;
 	}
 
-	public static void Init() {
-		// atTarget = false;
+	public void Run () {
+		if(ball.GetComponent<BallScript>().released && !dog.returnHome) {
+			dog.RunTowards(ball.transform.localPosition, ball.transform.localScale);
+			if(ball.GetComponent<BallScript>().pickup) {
+				if(dog.me.transform.localPosition == ball.transform.localPosition) {
+					ball.GetComponent<BallScript>().Fetched();
+				}
+			}
+		}
+	}
+
+	public void Init() {
+		// ball.GetComponent<BallScript>().Reset();
 	}
 }

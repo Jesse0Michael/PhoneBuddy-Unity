@@ -11,13 +11,13 @@ public class TugActivity {
 	public GameObject TugRope;
 	public GameObject TugRope60;
 
-	public TugActivity (Dog thatDog) {
+	public TugActivity (Dog thatDog, GameObject tug, GameObject tug60) {
 		Init();
 		target = new Vector3 (0.0f, -1.25f, 0.0f);
 		targetScale = new Vector3 (4.0f, 4.0f, 1.0f);
 		dog = thatDog;
-		TugRope = GameObject.Find("Rope");
-		TugRope60 = GameObject.Find("Rope60");
+		TugRope = tug;
+		TugRope60 = tug60;
 	}
 	
 	public void Init() {
