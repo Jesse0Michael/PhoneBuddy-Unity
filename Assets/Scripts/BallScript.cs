@@ -9,6 +9,7 @@ public class BallScript : MonoBehaviour {
 	public bool released;
 	public bool returning;
 	public bool pickup;
+	public float ballLineY;
 	private Vector3 furthest;
 	private float initialVelocity;
 	private float velocity;
@@ -17,12 +18,11 @@ public class BallScript : MonoBehaviour {
 	private float nowPoint;
 	private float backTime;
 	private float bounceMagnitude;
-	private float ballLineY;
 	private int bounces;
 
 	private const float maxVelocity = 5.0f;
-	private const float velocityReduceSpeed = 100.0f;
-	private Vector3 vanishingPoint = new Vector3(0, 1, 0);
+	private const float speed = 0.08f;
+	private const float vanishingPoint = 1.2f;
 	private Vector3 origin = new Vector3(3, -1.5f, 0);
 
 	void Start() {
@@ -54,21 +54,18 @@ public class BallScript : MonoBehaviour {
 	void Update () {
 		backTime += Time.deltaTime;
 
-		if(released && ! pickup) {
+		if(released && !pickup) {
 			if (bounces < Mathf.Floor(initialVelocity)) {
-				// ballRot -= Mathf.PI / (8 * initialVelocity);
-				//https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
-				float speed = .08f;//.01f * initialVelocity;
-				if (ballLineY >= 1.2f) {
-					ballLineY = 1.2f;
-				} else {
-					ballLineY += speed/10;
-				}
 				//float lolY = -1.0f / (velocity + Mathf.Pow(ballLineY/2.0f,2.0f)) + 1.2f;
 				velocity += speed;
 				
-				Ball.transform.localPosition = new Vector3(Ball.transform.localPosition.x - speed / 10, ballLineY + (Mathf.Abs(Mathf.Sin(velocity)) * bounceMagnitude), 0);
-				// Ball.transform.localRotation = Quaternion.RotateTowards(Ball.transform.localRotation, new Quaternion(0,0,speed*100, 0), 40.0f * speed);
+				if (ballLineY >= vanishingPoint) {
+					ballLineY = vanishingPoint;
+				} else {
+					ballLineY += speed/10;
+				}
+				Ball.transform.localPosition = new Vector3(Ball.transform.localPosition.x - speed / 10, 
+					ballLineY + (Mathf.Abs(Mathf.Sin(velocity)) * bounceMagnitude), 0);
 				Ball.transform.localScale = new Vector3(1 / ((velocity/2) + 1), 1 / ((velocity/2) + 1), 1.0f);
 
 
@@ -89,12 +86,17 @@ public class BallScript : MonoBehaviour {
 				} 
 			} else {
 				pickup = true;
+				Debug.Log("Ball ready for pickup");
 			}
 
 		} else if(returning) {
 			if (Controller.myDog.returnHome) {
-				Ball.transform.localPosition = Controller.myDog.me.transform.localPosition;
-				Ball.transform.localScale = Controller.myDog.me.transform.localScale;
+				if(!Controller.myDog.dogAnim.GetCurrentAnimatorStateInfo(0).IsTag("dogSheet_runAway")) {
+					Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
+				}
+				Ball.transform.localPosition = new Vector3(Controller.myDog.me.transform.localPosition.x, 
+					Controller.myDog.me.transform.localPosition.y - (0.08f * Controller.myDog.me.transform.localScale.y), 0);
+				Ball.transform.localScale = Controller.myDog.me.transform.localScale / 3;
 			} else {
 				// Controller.myDog.statEntertainment += 0.4f;
 				Reset();
@@ -126,7 +128,8 @@ public class BallScript : MonoBehaviour {
 		Debug.Log("Ball up");
 		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
 		Shadow.transform.localPosition = Vector3.zero;
-		float calcVelocity = (float)((Mathf.Sqrt(Mathf.Pow((Ball.transform.localPosition.x - furthest.x), 2) + Mathf.Pow((Ball.transform.localPosition.y - furthest.y), 2)))/(backTime));
+		float calcVelocity = (float)((Mathf.Sqrt(
+			Mathf.Pow((Ball.transform.localPosition.x - furthest.x), 2) + Mathf.Pow((Ball.transform.localPosition.y - furthest.y), 2)))/(backTime));
 		initialVelocity = Mathf.Max(1.0f, Mathf.Min(calcVelocity, maxVelocity));
 		velocity = 0.0f;
 		ballLineY = Ball.transform.localPosition.y;
@@ -142,9 +145,9 @@ public class BallScript : MonoBehaviour {
 	}
 	
 	public void Fetched() {
+		Debug.Log("Ball fetched");
 		released = false;
 		returning = true;
-		Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
 		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
 		Controller.myDog.ReturnHome();
 	}

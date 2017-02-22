@@ -102,14 +102,14 @@ public class Dog {
 		{
 			//Game1.appDJ.drinkOn = false;
 			//Game1.appDJ.foodOn = false;
-			RunTowards(origin, originScale);
+			RunTowards(origin, originScale, returnSpeedX, returnSpeedX);
 			
 		}
 	}
 
-	public void RunTowards(Vector3 target, Vector3 targetScale) {
-			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, target, returnSpeedX);
-			me.transform.localScale = Vector3.MoveTowards(me.transform.localScale, targetScale, returnSpeedS);
+	public void RunTowards(Vector3 target, Vector3 targetScale, float speed, float speedScale) {
+			me.transform.localPosition = Vector3.MoveTowards(me.transform.localPosition, target, speed);
+			me.transform.localScale = Vector3.MoveTowards(me.transform.localScale, targetScale, speedScale);
 			if (me.transform.localPosition != target || me.transform.localScale != targetScale)
 			{
 				//Game1.appDJ.runningOn = true;
