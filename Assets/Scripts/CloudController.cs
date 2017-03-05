@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CloudController : MonoBehaviour {
 
-	private int direction;
+	static public float direction;
   private float cloudTime;
 
   public GameObject cloudType;
@@ -11,8 +11,16 @@ public class CloudController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     resetCloudTime();
-		direction = Random.Range(0, 2);
-		int clouds = Random.Range(5, 8);
+    if(Random.Range(0, 2) == 0) {
+			direction = -1.0f;
+		} else {
+			direction = 1.0f;
+		}
+    for(int i = 0; i <= Random.Range(4, 7); i++)
+    {
+      spawnCloud(true);
+    }
+    spawnCloud();
 	}
 	
 	// Update is called once per frame
@@ -22,20 +30,25 @@ public class CloudController : MonoBehaviour {
     if(cloudTime <= 0.0f)
     {
       spawnCloud();
+      resetCloudTime();
     }
 	
 	}
 
   void resetCloudTime() {
-    cloudTime = Random.Range(25.0f, 65.0f);
+    cloudTime = Random.Range(40.0f, 100.0f);
+    Debug.Log("Cloud time: " + cloudTime);
   }
 
   void spawnCloud(bool initialCloud = false) {
     Vector3 cloudPosition;
+    float y = Random.Range(1.4f, 2.25f);
     if(initialCloud) {
-
+      cloudPosition =  new Vector3(Random.Range(-3.0f, 3.0f), y, 0);
+    } else {
+      cloudPosition =  new Vector3(-4.5f * direction, y, 0);
     }
-    // Instantiate (cloudType, , Quaternion.Euler (new Vector3 (0, 0, 0)));
+    Instantiate (cloudType, cloudPosition, Quaternion.Euler (new Vector3 (0, 0, 0)));
   }
 	
 }
