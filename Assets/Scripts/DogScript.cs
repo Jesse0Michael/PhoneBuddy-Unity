@@ -25,7 +25,7 @@ public class Dog {
 	private FetchActivity fetchActivity;
 	private TugActivity tugActivity;
 
-	public Dog (GameObject dog, GameObject ball, GameObject tug, GameObject tug60) {
+	public Dog (GameObject dog, GameObject ball, GameObject tug, GameObject tug60, GameObject pooBag) {
 		me = dog;
 		statThirst = .95f;
 		statHygiene = 1.0f;
@@ -59,6 +59,7 @@ public class Dog {
 		{
 			statHygiene -= .00005f;
 		}
+		pooControl();
 		
 		if (returnHome == false)
 		{
@@ -105,6 +106,10 @@ public class Dog {
 			RunTowards(origin, originScale, returnSpeedX, returnSpeedX);
 			
 		}
+	}
+
+	private void pooControl() {
+
 	}
 
 	public void RunTowards(Vector3 target, Vector3 targetScale, float speed, float speedScale) {

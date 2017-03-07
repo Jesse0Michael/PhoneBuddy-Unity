@@ -23,6 +23,7 @@ public class Controller : MonoBehaviour {
 	public GameObject TugRope60;
 	public GameObject Ball;
 	public GameObject Shadow;
+	public GameObject PooBag;
 
 
 	public static Activity myActivity;
@@ -33,7 +34,7 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myActivity = Activity.dogIdle;
-		myDog = new Dog(Dog, Ball, TugRope, TugRope60);
+		myDog = new Dog(Dog, Ball, TugRope, TugRope60, PooBag);
 
 		HideExcept(null);
 	}
@@ -53,6 +54,9 @@ public class Controller : MonoBehaviour {
 		if (except != Ball) {
 			Ball.GetComponent<SpriteRenderer> ().enabled = false;
 			Shadow.GetComponent<SpriteRenderer> ().enabled = false;
+		}
+		if (except != PooBag) {
+			PooBag.GetComponent<SpriteRenderer> ().enabled = false;
 		}
 	}
 	
@@ -102,6 +106,8 @@ public class Controller : MonoBehaviour {
 	public void Poo () {
 		Debug.Log ("Poo");
 		SliderScript.close = true;
+		HideExcept(PooBag);
+		PooBag.GetComponent<SpriteRenderer> ().enabled = true;
 		SetActivity(Activity.dogPoo);
 	}
 
