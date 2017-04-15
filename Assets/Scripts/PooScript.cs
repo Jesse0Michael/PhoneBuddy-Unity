@@ -6,6 +6,7 @@ public class PooScript : MonoBehaviour {
 	public Sprite Poo1;
 	public Sprite Poo2;
 
+	private GameObject bag;
   private Vector3 origin;
 	
 	// Use this for initialization
@@ -16,8 +17,10 @@ public class PooScript : MonoBehaviour {
 
 		origin = transform.localPosition;
 
-    float pooSize = (2.5f - transform.localPosition.y) / 2;
+    float pooSize = (transform.localPosition.y) / 3;
 		transform.localScale = new Vector3(1 - pooSize, 1 - pooSize, 1);
+
+	 bag = GameObject.Find("PooBag");
 	}
 	
 	// Update is called once per frame
@@ -26,13 +29,13 @@ public class PooScript : MonoBehaviour {
 	}
 
   void OnMouseDown() {
-    if(Controller.myActivity ==  Activity.dogPoo) {
+    if(Controller.myActivity == Activity.dogPoo) {
 		  Debug.Log("Poo down");
     }
 	}
 	
 	void OnMouseDrag() {
-    if(Controller.myActivity ==  Activity.dogPoo) {
+    if(Controller.myActivity == Activity.dogPoo) {
 		  Debug.Log("Poo drag");
 		  Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		  transform.localPosition = new Vector3(mousePos.x, mousePos.y, 0);
@@ -41,8 +44,11 @@ public class PooScript : MonoBehaviour {
 	
 	void OnMouseUp() {
 		Debug.Log("Poo up");
-		if (Controller.myActivity ==  Activity.dogPoo && false) { //mouse intersect with bag && poo activity
-      Controller.myDog.statHygiene += 40.0f;
+		Debug.Log(bag.GetComponent<BoxCollider2D>());
+		bool coll = this.GetComponent<BoxCollider2D>().IsTouching(bag.GetComponent<BoxCollider2D>());
+		Debug.Log("Colliding :" + coll);
+		if (Controller.myActivity == Activity.dogPoo && coll) {
+      Controller.myDog.statHygiene += 0.3f;
       Destroy(gameObject);
     } else {
       transform.localPosition = origin;
