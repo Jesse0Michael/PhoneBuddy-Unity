@@ -22,7 +22,7 @@ public class FetchActivity {
 				Mathf.Max(minScale, ball.transform.localScale.y), 1);
 			dog.RunTowards(target, targetScale, dog.returnSpeedX / (1.5f + ballLineY), dog.returnSpeedX / (6.5f - ballLineY));
 			if(ball.GetComponent<BallScript>().pickup) {
-				if(dog.me.transform.localPosition.x == ball.transform.localPosition.x) {
+				if(dog.transform.localPosition.x == ball.transform.localPosition.x) {
 					ball.GetComponent<BallScript>().Fetched();
 				}
 			}

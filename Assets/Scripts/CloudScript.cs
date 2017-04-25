@@ -9,6 +9,14 @@ public class CloudScript : MonoBehaviour {
 	public Sprite Cloud4;
 	public Sprite Cloud5;
 
+  public AudioClip Bird1;
+  public AudioClip Bird2;
+  public AudioClip Bird3;
+  public AudioClip Bird4;
+  public AudioClip Bird5;
+
+	private AudioSource source;
+
 	private float velocity;
 	
 	// Use this for initialization
@@ -22,7 +30,11 @@ public class CloudScript : MonoBehaviour {
     float cloudSize = (2.5f - transform.localPosition.y) / 2;
 		transform.localScale = new Vector3(1 - cloudSize, 1 - cloudSize, 1);
 		
-		//Play bird sound
+		source = GetComponent<AudioSource>();
+		AudioClip[] birdSounds = new AudioClip[5]{Bird1, Bird2, Bird3, Bird4, Bird5};
+		int birdSelection = Random.Range(0, 5);
+		source.clip = birdSounds[birdSelection];
+		source.Play();
 	}
 	
 	// Update is called once per frame

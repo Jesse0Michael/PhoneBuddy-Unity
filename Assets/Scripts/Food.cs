@@ -21,21 +21,20 @@ public class FoodActivity {
 		if (atTarget) {
 			if (dog.statHunger <= 1.0f) {
 				dog.AnimTrigger("dogSheet_eat");
-				// Game1.appDJ.foodOn = true;
+				dog.Eating();
 				dog.statHunger += 0.0004f;
 			} else {
+				dog.StopSounds();
 				dog.ReturnHome();
 				atTarget = false;
-				// Game1.appDJ.foodOn = false;
-				// Game1.appDJ.runningOn = true;
 			}
 
 		} else if (dog.statHunger <= 0.9f) {
-			dog.me.transform.localPosition = Vector3.MoveTowards(dog.me.transform.localPosition, target, dog.returnSpeedX);
+			dog.transform.localPosition = Vector3.MoveTowards(dog.transform.localPosition, target, dog.returnSpeedX);
 			dog.AnimTrigger("dogSheet_walk");
-			// Game1.appDJ.runningOn = true;
-			if(dog.me.transform.localPosition == target) {
-				// Game1.appDJ.runningOn = false;
+			dog.Bark();
+			if(dog.transform.localPosition == target) {
+				dog.StopSounds();
 				atTarget = true;
 			}
 		}

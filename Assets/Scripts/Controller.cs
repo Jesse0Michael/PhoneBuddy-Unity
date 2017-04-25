@@ -15,7 +15,7 @@ public enum Activity
 
 public class Controller : MonoBehaviour {
 
-	public GameObject Dog;
+	public GameObject Doggo;
 
 	public GameObject FoodDish;
 	public GameObject WaterDish;
@@ -25,7 +25,6 @@ public class Controller : MonoBehaviour {
 	public GameObject Shadow;
 	public GameObject PooBag;
 
-
 	public static Activity myActivity;
 
 	public static Dog myDog;
@@ -34,8 +33,7 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myActivity = Activity.dogIdle;
-		myDog = new Dog(Dog, Ball, TugRope, TugRope60, PooBag);
-
+		myDog = GameObject.Find("Dog").GetComponent<Dog>();
 		HideExcept(null);
 	}
 
@@ -65,11 +63,6 @@ public class Controller : MonoBehaviour {
 			myDog.ReturnHome();
 		}
 		myActivity = act;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		myDog.Update ();	
 	}
 
 	public void Fetch () {
@@ -109,12 +102,5 @@ public class Controller : MonoBehaviour {
 		HideExcept(PooBag);
 		PooBag.GetComponent<SpriteRenderer> ().enabled = true;
 		SetActivity(Activity.dogPoo);
-	}
-
-	public void Vibrate () {
-//		if (Game1.appDJ.volOn)
-//		{
-//			vibrateDelay.start();
-//		}
 	}
 }

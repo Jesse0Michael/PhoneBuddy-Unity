@@ -21,26 +21,21 @@ public class WaterActivity {
 		if (atTarget) {
 			if (dog.statThirst <= 1.0f) {
 				dog.AnimTrigger("dogSheet_drink");
-				// Game1.appDJ.drinkOn = true;
+				dog.Drinking();
 				dog.statThirst += 0.0004f;
 			} else {
+				dog.StopSounds();
 				dog.ReturnHome();
 				atTarget = false;
-				// Game1.appDJ.drinkOn = false;
-				// Game1.appDJ.runningOn = true;
 			}
 		} else if (dog.statThirst <= 0.9f) {
-			dog.me.transform.localPosition = Vector3.MoveTowards(dog.me.transform.localPosition, target, dog.returnSpeedX);
+			dog.transform.localPosition = Vector3.MoveTowards(dog.transform.localPosition, target, dog.returnSpeedX);
 			dog.AnimTrigger("dogSheet_walk_left");
-			// Game1.appDJ.runningOn = true;
-			if(dog.me.transform.localPosition == target) {
-				// Game1.appDJ.runningOn = false;
+			dog.Bark();
+			if(dog.transform.localPosition == target) {
+				dog.StopSounds();
 				atTarget = true;
 			}
 		}
-	}
-	
-	public void Chuck() {
-		
 	}
 }

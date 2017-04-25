@@ -45,8 +45,8 @@ public class TugActivity {
 				}
 				
 				if(changed) {
-					//dog.Vibrate();
-					//dog.GrowlSound();
+					Handheld.Vibrate();
+					Controller.myDog.Growl();
 				}
 			} else {
 				dog.AnimTrigger("dogSheet_idle");
@@ -58,7 +58,7 @@ public class TugActivity {
 			// dog.me.transform.localScale = Vector3.MoveTowards(dog.me.transform.localScale, targetScale, dog.returnSpeedS);
 			// dog.AnimTrigger("dogSheet_runTowards");
 			// Game1.appDJ.runningOn = true;
-			if(dog.me.transform.localPosition == target && dog.me.transform.localScale == targetScale) {
+			if(dog.transform.localPosition == target && dog.transform.localScale == targetScale) {
 				// Game1.appDJ.runningOn = false;
 				TugRope60.GetComponent<SpriteRenderer> ().enabled = true;
 				TugRope60.GetComponent<CircleCollider2D> ().enabled = true;

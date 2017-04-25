@@ -25,8 +25,10 @@ public class BallScript : MonoBehaviour {
 	private const float vanishingPoint = 1.2f;
 	private Vector3 origin = new Vector3(3, -1.5f, 0);
 
+	public AudioSource thud;
+
 	void Start() {
-		
+		thud = GetComponent<AudioSource>();
 	}
 
 	// Use this for initialization
@@ -79,8 +81,8 @@ public class BallScript : MonoBehaviour {
 
 				if (oldPoint < oldOldPoint && oldPoint < nowPoint) {
 					Debug.Log("Bounce: " + bounces);
-					//Controller.vibrate();
-					//thud(1.0f - (float)(bounceCount/10));
+					Handheld.Vibrate();
+					thud.Play();
 					bounceMagnitude /= 2.0f;
 					bounces++;
 				} 
@@ -94,9 +96,9 @@ public class BallScript : MonoBehaviour {
 				if(!Controller.myDog.dogAnim.GetCurrentAnimatorStateInfo(0).IsTag("dogSheet_runAway")) {
 					Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
 				}
-				Ball.transform.localPosition = new Vector3(Controller.myDog.me.transform.localPosition.x, 
-					Controller.myDog.me.transform.localPosition.y - (0.08f * Controller.myDog.me.transform.localScale.y), 0);
-				Ball.transform.localScale = Controller.myDog.me.transform.localScale / 3;
+				Ball.transform.localPosition = new Vector3(Controller.myDog.transform.localPosition.x, 
+					Controller.myDog.transform.localPosition.y - (0.08f * Controller.myDog.transform.localScale.y), 0);
+				Ball.transform.localScale = Controller.myDog.transform.localScale / 3;
 			} else {
 				// Controller.myDog.statEntertainment += 0.4f;
 				Reset();
@@ -142,6 +144,7 @@ public class BallScript : MonoBehaviour {
 		released = true;
 		Ball.GetComponent<SpriteRenderer> ().sortingOrder = 0;
 		Shadow.GetComponent<SpriteRenderer> ().enabled = true;
+		Controller.myDog.Bark();
 	}
 	
 	public void Fetched() {
