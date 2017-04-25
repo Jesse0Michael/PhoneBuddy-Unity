@@ -81,7 +81,7 @@ public class BallScript : MonoBehaviour {
 
 				if (oldPoint < oldOldPoint && oldPoint < nowPoint) {
 					Debug.Log("Bounce: " + bounces);
-					Handheld.Vibrate();
+					// Handheld.Vibrate();
 					thud.Play();
 					bounceMagnitude /= 2.0f;
 					bounces++;

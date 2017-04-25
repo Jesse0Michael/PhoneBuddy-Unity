@@ -45,7 +45,7 @@ public class TugActivity {
 				}
 				
 				if(changed) {
-					Handheld.Vibrate();
+					// Handheld.Vibrate();
 					Controller.myDog.Growl();
 				}
 			} else {
