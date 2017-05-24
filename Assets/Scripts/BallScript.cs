@@ -37,6 +37,7 @@ public class BallScript : MonoBehaviour {
 		released = false;
 		pickup = false;
 		Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
+		Ball.GetComponent<SpriteRenderer> ().enabled = true;
 		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
 		furthest = new Vector3(3, -1.5f, 0);
 		initialVelocity = 0.0f;
@@ -55,53 +56,58 @@ public class BallScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		backTime += Time.deltaTime;
-
-		if(released && !pickup) {
-			if (bounces < Mathf.Floor(initialVelocity)) {
-				//float lolY = -1.0f / (velocity + Mathf.Pow(ballLineY/2.0f,2.0f)) + 1.2f;
-				velocity += speed;
-				
-				if (ballLineY >= vanishingPoint) {
-					ballLineY = vanishingPoint;
-				} else {
-					ballLineY += speed/10;
-				}
-				Ball.transform.localPosition = new Vector3(Ball.transform.localPosition.x - speed / 10, 
-					ballLineY + (Mathf.Abs(Mathf.Sin(velocity)) * bounceMagnitude), 0);
-				Ball.transform.localScale = new Vector3(1 / ((velocity/2) + 1), 1 / ((velocity/2) + 1), 1.0f);
-
-
-				Shadow.transform.localPosition = new Vector3(Ball.transform.localPosition.x, ballLineY - Ball.transform.localScale.y / 3, 0);
-				Shadow.transform.localScale = new Vector3(Ball.transform.localScale.x / (Mathf.Abs(Mathf.Sin(velocity)) + 1),
-					Ball.transform.localScale.y / (Mathf.Abs(Mathf.Sin(velocity)) + 1), 1.0f);
+		if(Controller.myActivity == Activity.dogFetch) {
+			if(released && !pickup) {
+				if (bounces < Mathf.Floor(initialVelocity)) {
+					//float lolY = -1.0f / (velocity + Mathf.Pow(ballLineY/2.0f,2.0f)) + 1.2f;
+					velocity += speed;
 					
-				oldOldPoint = oldPoint;
-				oldPoint = nowPoint;
-				nowPoint = Mathf.Abs(Mathf.Sin(velocity));
+					if (ballLineY >= vanishingPoint) {
+						ballLineY = vanishingPoint;
+					} else {
+						ballLineY += speed/10;
+					}
+					Ball.transform.localPosition = new Vector3(Ball.transform.localPosition.x - speed / 10, 
+						ballLineY + (Mathf.Abs(Mathf.Sin(velocity)) * bounceMagnitude), 0);
+					Ball.transform.localScale = new Vector3(1 / ((velocity/2) + 1), 1 / ((velocity/2) + 1), 1.0f);
 
-				if (oldPoint < oldOldPoint && oldPoint < nowPoint) {
-					Debug.Log("Bounce: " + bounces);
-					// Handheld.Vibrate();
-					thud.Play();
-					bounceMagnitude /= 2.0f;
-					bounces++;
-				} 
-			} else {
-				pickup = true;
-				Debug.Log("Ball ready for pickup");
-			}
 
-		} else if(returning) {
-			if (Controller.myDog.returnHome) {
-				if(!Controller.myDog.dogAnim.GetCurrentAnimatorStateInfo(0).IsTag("dogSheet_runAway")) {
-					Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
+					Shadow.transform.localPosition = new Vector3(Ball.transform.localPosition.x, ballLineY - Ball.transform.localScale.y / 3, 0);
+					Shadow.transform.localScale = new Vector3(Ball.transform.localScale.x / (Mathf.Abs(Mathf.Sin(velocity)) + 1),
+						Ball.transform.localScale.y / (Mathf.Abs(Mathf.Sin(velocity)) + 1), 1.0f);
+						
+					oldOldPoint = oldPoint;
+					oldPoint = nowPoint;
+					nowPoint = Mathf.Abs(Mathf.Sin(velocity));
+
+					if (oldPoint < oldOldPoint && oldPoint < nowPoint) {
+						Debug.Log("Bounce: " + bounces);
+						#if UNITY_ANDROID || UNITY_IPHONE
+							Handheld.Vibrate();
+						#endif
+						thud.Play();
+						bounceMagnitude /= 2.0f;
+						bounces++;
+					} 
+				} else {
+					pickup = true;
+					Debug.Log("Ball ready for pickup");
 				}
-				Ball.transform.localPosition = new Vector3(Controller.myDog.transform.localPosition.x, 
-					Controller.myDog.transform.localPosition.y - (0.08f * Controller.myDog.transform.localScale.y), 0);
-				Ball.transform.localScale = Controller.myDog.transform.localScale / 3;
-			} else {
-				// Controller.myDog.statEntertainment += 0.4f;
-				Reset();
+
+			} else if(returning) {
+				if (Controller.myDog.returnHome) {
+					if(Controller.myDog.dogAnim.GetCurrentAnimatorStateInfo(0).IsName("dogSheet_runAway")) {
+						Ball.GetComponent<SpriteRenderer> ().enabled = false;
+					} else {
+						Ball.GetComponent<SpriteRenderer> ().enabled = true;
+					}
+					Ball.transform.localPosition = new Vector3(Controller.myDog.transform.localPosition.x, 
+						Controller.myDog.transform.localPosition.y - (0.08f * Controller.myDog.transform.localScale.y), 0);
+					Ball.transform.localScale = Controller.myDog.transform.localScale / 3;
+				} else {
+					// Controller.myDog.statEntertainment += 0.4f;
+					Reset();
+				}
 			}
 		}
 	}
@@ -152,6 +158,8 @@ public class BallScript : MonoBehaviour {
 		released = false;
 		returning = true;
 		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
+		Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
+		Controller.myDog.returnSpeedS = .02f;
 		Controller.myDog.ReturnHome();
 	}
 }

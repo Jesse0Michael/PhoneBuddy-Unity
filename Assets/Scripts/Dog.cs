@@ -125,7 +125,7 @@ public class Dog : MonoBehaviour {
 		if (returnHome == true)
 		{
 			StopSounds();
-			RunTowards(origin, originScale, returnSpeedX, returnSpeedX);
+			RunTowards(origin, originScale, returnSpeedX, returnSpeedS);
 		}
 
 		if(barking == true) {
@@ -166,6 +166,7 @@ public class Dog : MonoBehaviour {
 				AnimTrigger("dogSheet_idle");
 				StopSounds();
 				returnHome = false;
+				returnSpeedS = .05f;
 			}
 	}
 

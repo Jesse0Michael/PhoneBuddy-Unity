@@ -20,7 +20,7 @@ public class FetchActivity {
 			Vector3 target = new Vector3(ball.transform.localPosition.x, ballLineY, 0);
 			Vector3 targetScale = new Vector3(Mathf.Max(minScale, ball.transform.localScale.x), 
 				Mathf.Max(minScale, ball.transform.localScale.y), 1);
-			dog.RunTowards(target, targetScale, dog.returnSpeedX / (1.5f + ballLineY), dog.returnSpeedX / (6.5f - ballLineY));
+			dog.RunTowards(target, targetScale, dog.returnSpeedX / Mathf.Abs(1.5f + ballLineY), dog.returnSpeedX / (6.5f - ballLineY));
 			if(ball.GetComponent<BallScript>().pickup) {
 				if(dog.transform.localPosition.x == ball.transform.localPosition.x) {
 					ball.GetComponent<BallScript>().Fetched();

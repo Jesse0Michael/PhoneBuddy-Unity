@@ -42,7 +42,7 @@ public class CloudController : MonoBehaviour {
 
   void spawnCloud(bool initialCloud = false) {
     Vector3 cloudPosition;
-    float y = Random.Range(1.4f, 2.25f);
+    float y = Random.Range(1.5f, 2.25f);
     if(initialCloud) {
       cloudPosition =  new Vector3(Random.Range(-3.0f, 3.0f), y, 0);
     } else {

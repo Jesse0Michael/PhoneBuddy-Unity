@@ -9,3 +9,5 @@ Builds/
 *.user
 *.userprefs
 *.DS_store
+
+.vscode/

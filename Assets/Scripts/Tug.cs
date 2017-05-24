@@ -45,7 +45,9 @@ public class TugActivity {
 				}
 				
 				if(changed) {
-					// Handheld.Vibrate();
+					#if UNITY_ANDROID || UNITY_IPHONE
+						Handheld.Vibrate();
+					#endif
 					Controller.myDog.Growl();
 				}
 			} else {
