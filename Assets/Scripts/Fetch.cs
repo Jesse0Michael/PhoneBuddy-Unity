@@ -17,12 +17,12 @@ public class FetchActivity {
 	public void Run () {
 		if(ball.GetComponent<BallScript>().released && !dog.returnHome) {
 			float ballLineY = ball.GetComponent<BallScript>().ballLineY;
-			Vector3 target = new Vector3(ball.transform.localPosition.x, ballLineY, 0);
+			Vector3 target = new Vector3(ball.transform.position.x, ballLineY, 0);
 			Vector3 targetScale = new Vector3(Mathf.Max(minScale, ball.transform.localScale.x), 
 				Mathf.Max(minScale, ball.transform.localScale.y), 1);
 			dog.RunTowards(target, targetScale, dog.returnSpeedX / Mathf.Abs(1.5f + ballLineY), dog.returnSpeedX / (6.5f - ballLineY));
 			if(ball.GetComponent<BallScript>().pickup) {
-				if(dog.transform.localPosition.x == ball.transform.localPosition.x) {
+				if(dog.transform.localPosition.x == ball.transform.position.x) {
 					ball.GetComponent<BallScript>().Fetched();
 				}
 			}

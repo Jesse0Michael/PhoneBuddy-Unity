@@ -19,16 +19,17 @@ public class BallScript : MonoBehaviour {
 	private float backTime;
 	private float bounceMagnitude;
 	private int bounces;
+	private Vector3 origin;
 
 	private const float maxVelocity = 5.0f;
 	private const float speed = 0.08f;
 	private const float vanishingPoint = 1.2f;
-	private Vector3 origin = new Vector3(3, -1.5f, 0);
 
 	public AudioSource thud;
 
 	void Start() {
 		thud = GetComponent<AudioSource>();
+		origin = GameObject.Find("Ball").transform.position;
 	}
 
 	// Use this for initialization
@@ -39,7 +40,7 @@ public class BallScript : MonoBehaviour {
 		Ball.GetComponent<SpriteRenderer> ().sortingOrder = 10;
 		Ball.GetComponent<SpriteRenderer> ().enabled = true;
 		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
-		furthest = new Vector3(3, -1.5f, 0);
+		furthest = origin;
 		initialVelocity = 0.0f;
 		velocity = 0.0f;
 		oldOldPoint = 0.0f;
@@ -47,8 +48,8 @@ public class BallScript : MonoBehaviour {
 		nowPoint = 0.0f;
 		backTime = 0.0f;
 		bounces = 0;
-		Ball.transform.localPosition = furthest;
-		Ball.transform.localScale = Vector3.one;
+		Ball.transform.position = origin;
+		Ball.transform.localScale = new Vector3(0.6f, 0.6f, 1.0f);
 		Shadow.transform.localPosition = origin;
 		Shadow.transform.localScale = Vector3.one;
 	}
@@ -67,14 +68,14 @@ public class BallScript : MonoBehaviour {
 					} else {
 						ballLineY += speed/10;
 					}
-					Ball.transform.localPosition = new Vector3(Ball.transform.localPosition.x - speed / 10, 
+					Ball.transform.position = new Vector3(Ball.transform.position.x - speed / 10, 
 						ballLineY + (Mathf.Abs(Mathf.Sin(velocity)) * bounceMagnitude), 0);
-					Ball.transform.localScale = new Vector3(1 / ((velocity/2) + 1), 1 / ((velocity/2) + 1), 1.0f);
+					Ball.transform.localScale = new Vector3(0.6f / ((velocity) + 1), 0.6f / ((velocity) + 1), 1.0f);
 
 
-					Shadow.transform.localPosition = new Vector3(Ball.transform.localPosition.x, ballLineY - Ball.transform.localScale.y / 3, 0);
-					Shadow.transform.localScale = new Vector3(Ball.transform.localScale.x / (Mathf.Abs(Mathf.Sin(velocity)) + 1),
-						Ball.transform.localScale.y / (Mathf.Abs(Mathf.Sin(velocity)) + 1), 1.0f);
+					Shadow.transform.localPosition = new Vector3(Ball.transform.position.x, ballLineY - Ball.transform.localScale.y / 2, 0);
+					Shadow.transform.localScale = new Vector3((Ball.transform.localScale.x * 2) / (Mathf.Abs(Mathf.Sin(velocity)) + 1),
+						(Ball.transform.localScale.y * 2) / (Mathf.Abs(Mathf.Sin(velocity)) + 1), 1.0f);
 						
 					oldOldPoint = oldPoint;
 					oldPoint = nowPoint;
@@ -101,9 +102,9 @@ public class BallScript : MonoBehaviour {
 					} else {
 						Ball.GetComponent<SpriteRenderer> ().enabled = true;
 					}
-					Ball.transform.localPosition = new Vector3(Controller.myDog.transform.localPosition.x, 
+					Ball.transform.position = new Vector3(Controller.myDog.transform.localPosition.x, 
 						Controller.myDog.transform.localPosition.y - (0.08f * Controller.myDog.transform.localScale.y), 0);
-					Ball.transform.localScale = Controller.myDog.transform.localScale / 3;
+					Ball.transform.localScale = Controller.myDog.transform.localScale / 5;
 				} else {
 					// Controller.myDog.statEntertainment += 0.4f;
 					Reset();
@@ -113,37 +114,39 @@ public class BallScript : MonoBehaviour {
 	}
 	
 	void OnMouseDown() {
-		if(!released && !returning) {
+		if(!released && !returning && Controller.myActivity == Activity.dogFetch) {
 			Debug.Log("Ball down");
 			backTime = 0.0f;
 		}
 	}
 	
 	void OnMouseDrag() {
-		if(!released && !returning) {
+		if(!released && !returning && Controller.myActivity == Activity.dogFetch) {
 			Debug.Log("Ball drag");
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			Shadow.transform.localPosition = new Vector3(mousePos.x, mousePos.y, 0);
-			Ball.transform.localPosition = new Vector3(mousePos.x, mousePos.y, 0);
-			if(Ball.transform.localPosition.y < furthest.y) {
-				furthest = Ball.transform.localPosition;
+			Ball.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+			if(Ball.transform.position.y < furthest.y) {
+				furthest = Ball.transform.position;
 				backTime = 0.0f;
 			}
 		}
 	}
 	
 	void OnMouseUp() {
-		Debug.Log("Ball up");
-		Shadow.GetComponent<SpriteRenderer> ().enabled = false;
-		Shadow.transform.localPosition = Vector3.zero;
-		float calcVelocity = (float)((Mathf.Sqrt(
-			Mathf.Pow((Ball.transform.localPosition.x - furthest.x), 2) + Mathf.Pow((Ball.transform.localPosition.y - furthest.y), 2)))/(backTime));
-		initialVelocity = Mathf.Max(1.0f, Mathf.Min(calcVelocity, maxVelocity));
-		velocity = 0.0f;
-		ballLineY = Ball.transform.localPosition.y;
-		bounceMagnitude = initialVelocity / 2;
-		Debug.Log("Ball calculated velocity: " + calcVelocity + " used velocity: " + initialVelocity);
-		release();
+		if(!released && !returning && Controller.myActivity == Activity.dogFetch) {
+			Debug.Log("Ball up");
+			Shadow.GetComponent<SpriteRenderer> ().enabled = false;
+			Shadow.transform.localPosition = Vector3.zero;
+			float calcVelocity = (float)((Mathf.Sqrt(
+				Mathf.Pow((Ball.transform.position.x - furthest.x), 2) + Mathf.Pow((Ball.transform.position.y - furthest.y), 2)))/(backTime));
+			initialVelocity = Mathf.Max(1.0f, Mathf.Min(calcVelocity, maxVelocity));
+			velocity = 0.0f;
+			ballLineY = Ball.transform.position.y;
+			bounceMagnitude = initialVelocity / 2;
+			Debug.Log("Ball calculated velocity: " + calcVelocity + " used velocity: " + initialVelocity);
+			release();
+		}
 	}
 
 	private void release() {

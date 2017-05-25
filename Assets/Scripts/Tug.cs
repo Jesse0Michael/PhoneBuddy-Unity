@@ -56,15 +56,11 @@ public class TugActivity {
 			
 		} else {
 			dog.RunTowards(target, targetScale, dog.returnSpeedX, dog.returnSpeedS);
-			// dog.me.transform.localPosition = Vector3.MoveTowards(dog.me.transform.localPosition, target, dog.returnSpeedX);
-			// dog.me.transform.localScale = Vector3.MoveTowards(dog.me.transform.localScale, targetScale, dog.returnSpeedS);
-			// dog.AnimTrigger("dogSheet_runTowards");
-			// Game1.appDJ.runningOn = true;
+			dog.Bark();
 			if(dog.transform.localPosition == target && dog.transform.localScale == targetScale) {
-				// Game1.appDJ.runningOn = false;
+				dog.StopSounds();
 				TugRope60.GetComponent<SpriteRenderer> ().enabled = true;
 				TugRope60.GetComponent<CircleCollider2D> ().enabled = true;
-				// dog.AnimTrigger("dogSheet_idle");
 				atTarget = true;
 			}
 		}

@@ -24,12 +24,12 @@ TextureImporter:
     21300034: tugSheet_17
     21300036: tugSheet_18
     21300038: tugSheet_19
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -37,14 +37,12 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -55,21 +53,60 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: tugSheet_0
+    - serializedVersion: 2
+      name: tugSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -79,7 +116,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_1
       rect:
         serializedVersion: 2
         x: 200
@@ -89,7 +129,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_2
       rect:
         serializedVersion: 2
         x: 400
@@ -99,7 +142,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_3
       rect:
         serializedVersion: 2
         x: 600
@@ -109,7 +155,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -119,7 +168,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_5
       rect:
         serializedVersion: 2
         x: 200
@@ -129,7 +181,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_6
       rect:
         serializedVersion: 2
         x: 400
@@ -139,7 +194,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_7
       rect:
         serializedVersion: 2
         x: 600
@@ -149,7 +207,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -159,7 +220,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_9
       rect:
         serializedVersion: 2
         x: 200
@@ -169,7 +233,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_10
       rect:
         serializedVersion: 2
         x: 400
@@ -179,7 +246,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_11
       rect:
         serializedVersion: 2
         x: 600
@@ -189,7 +259,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_12
       rect:
         serializedVersion: 2
         x: 0
@@ -199,7 +272,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_13
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_13
       rect:
         serializedVersion: 2
         x: 200
@@ -209,7 +285,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_14
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_14
       rect:
         serializedVersion: 2
         x: 400
@@ -219,7 +298,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_15
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_15
       rect:
         serializedVersion: 2
         x: 600
@@ -229,7 +311,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_16
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_16
       rect:
         serializedVersion: 2
         x: 0
@@ -239,7 +324,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_17
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_17
       rect:
         serializedVersion: 2
         x: 200
@@ -249,7 +337,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_18
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_18
       rect:
         serializedVersion: 2
         x: 400
@@ -259,7 +350,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tugSheet_19
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tugSheet_19
       rect:
         serializedVersion: 2
         x: 600
@@ -269,6 +363,9 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

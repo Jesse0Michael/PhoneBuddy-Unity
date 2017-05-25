@@ -28,12 +28,12 @@ TextureImporter:
     21300042: dogSheet_21
     21300044: dogSheet_22
     21300046: dogSheet_23
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -41,14 +41,12 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -59,21 +57,60 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: dogSheet_0
+    - serializedVersion: 2
+      name: dogSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -83,7 +120,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_1
       rect:
         serializedVersion: 2
         x: 200
@@ -93,7 +133,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_2
       rect:
         serializedVersion: 2
         x: 400
@@ -103,7 +146,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_3
       rect:
         serializedVersion: 2
         x: 600
@@ -113,7 +159,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -123,7 +172,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_5
       rect:
         serializedVersion: 2
         x: 200
@@ -133,7 +185,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_6
       rect:
         serializedVersion: 2
         x: 400
@@ -143,7 +198,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_7
       rect:
         serializedVersion: 2
         x: 600
@@ -153,7 +211,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -163,7 +224,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_9
       rect:
         serializedVersion: 2
         x: 200
@@ -173,7 +237,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_10
       rect:
         serializedVersion: 2
         x: 400
@@ -183,7 +250,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_11
       rect:
         serializedVersion: 2
         x: 600
@@ -193,7 +263,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_12
       rect:
         serializedVersion: 2
         x: 0
@@ -203,7 +276,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_13
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_13
       rect:
         serializedVersion: 2
         x: 200
@@ -213,7 +289,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_14
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_14
       rect:
         serializedVersion: 2
         x: 400
@@ -223,7 +302,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_15
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_15
       rect:
         serializedVersion: 2
         x: 600
@@ -233,7 +315,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_16
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_16
       rect:
         serializedVersion: 2
         x: 0
@@ -243,7 +328,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_17
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_17
       rect:
         serializedVersion: 2
         x: 200
@@ -253,7 +341,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_18
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_18
       rect:
         serializedVersion: 2
         x: 400
@@ -263,7 +354,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_19
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_19
       rect:
         serializedVersion: 2
         x: 600
@@ -273,7 +367,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_20
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_20
       rect:
         serializedVersion: 2
         x: 0
@@ -283,7 +380,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_21
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_21
       rect:
         serializedVersion: 2
         x: 200
@@ -293,7 +393,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_22
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_22
       rect:
         serializedVersion: 2
         x: 400
@@ -303,7 +406,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dogSheet_23
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dogSheet_23
       rect:
         serializedVersion: 2
         x: 600
@@ -313,6 +419,9 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
