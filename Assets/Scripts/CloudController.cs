@@ -28,8 +28,7 @@ public class CloudController : MonoBehaviour
         spawnCloud();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         cloudTime -= Time.deltaTime;
 

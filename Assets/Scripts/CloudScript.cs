@@ -39,8 +39,7 @@ public class CloudScript : MonoBehaviour
         source.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(5 * CloudController.direction, transform.localPosition.y, transform.localPosition.z), velocity);
 

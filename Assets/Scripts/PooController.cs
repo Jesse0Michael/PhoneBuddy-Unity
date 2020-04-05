@@ -13,8 +13,7 @@ public class PooController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Controller.myDog.statHygiene < 0.80f && pooCount <= 0)
         {

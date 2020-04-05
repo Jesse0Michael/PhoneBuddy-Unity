@@ -72,7 +72,7 @@ public class Dog : MonoBehaviour
         barkSounds = new AudioClip[5] { Bark1, Bark2, Bark3, Bark4, Bark5 };
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (statThirst > 0.0f)
         {

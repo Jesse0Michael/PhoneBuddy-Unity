@@ -57,8 +57,7 @@ public class BallScript : MonoBehaviour
         Shadow.transform.localScale = Vector3.one;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         backTime += Time.deltaTime;
         if (Controller.myActivity == Activity.dogFetch)

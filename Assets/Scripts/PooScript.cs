@@ -26,8 +26,7 @@ public class PooScript : MonoBehaviour
         bag = GameObject.Find("PooBag");
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
     }
